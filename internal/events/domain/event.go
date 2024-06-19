@@ -35,7 +35,7 @@ type Event struct{
 	Capacity int
 	Price float64
 	PartnerID int
-	// Spots []Spot
+	Spots []Spot
 	// Tickets []Ticket
 }
 
