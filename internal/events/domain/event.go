@@ -36,7 +36,7 @@ type Event struct{
 	Price float64
 	PartnerID int
 	Spots []Spot
-	// Tickets []Ticket
+	Tickets []Ticket
 }
 
 func (e Event) Validate() error {
