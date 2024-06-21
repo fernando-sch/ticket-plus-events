@@ -4,6 +4,7 @@ type ReservationRequest struct {
 	Spots []string `json:"spots"`
 	EventID string `json:"event_id"`
 	TicketType string `json:"ticket_type"`
+	CardHash   string   `json:"card_hash"`
 	Email string `json:"email"`
 }
 
