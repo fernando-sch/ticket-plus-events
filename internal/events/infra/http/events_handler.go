@@ -11,7 +11,7 @@ import (
 type EventsHandler struct {
 	listEventsUseCase  *usecase.ListEventsUseCase
 	getEventUseCase    *usecase.GetEventUseCase
-	// createEventUseCase *usecase.CreateEventUseCase
+	createEventUseCase *usecase.CreateEventUseCase
 	buyTicketsUseCase  *usecase.BuyTicketsUseCase
 	// createSpotsUseCase *usecase.CreateSpotsUseCase
 	listSpotsUseCase   *usecase.ListSpotsUseCase
@@ -21,7 +21,7 @@ type EventsHandler struct {
 func NewEventsHandler(
 	listEventsUseCase *usecase.ListEventsUseCase,
 	getEventUseCase *usecase.GetEventUseCase,
-	// createEventUseCase *usecase.CreateEventUseCase,
+	createEventUseCase *usecase.CreateEventUseCase,
 	buyTicketsUseCase *usecase.BuyTicketsUseCase,
 	// createSpotsUseCase *usecase.CreateSpotsUseCase,
 	listSpotsUseCase *usecase.ListSpotsUseCase,
@@ -93,23 +93,23 @@ func (h *EventsHandler) GetEvent(w http.ResponseWriter, r *http.Request) {
 // @Failure 400 {object} string
 // @Failure 500 {object} string
 // @Router /events [post]
-// func (h *EventsHandler) CreateEvent(w http.ResponseWriter, r *http.Request) {
-// 	var input usecase.CreateEventInputDTO
-// 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-// 		http.Error(w, err.Error(), http.StatusBadRequest)
-// 		return
-// 	}
+func (h *EventsHandler) CreateEvent(w http.ResponseWriter, r *http.Request) {
+	var input usecase.CreateEventInputDTO
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-// 	output, err := h.createEventUseCase.Execute(input)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
+	output, err := h.createEventUseCase.Execute(input)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-// 	w.WriteHeader(http.StatusCreated)
-// 	w.Header().Set("Content-Type", "application/json")
-// 	json.NewEncoder(w).Encode(output)
-// }
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(output)
+}
 
 // BuyTickets handles the request to buy tickets for an event.
 // @Summary Buy tickets for an event
