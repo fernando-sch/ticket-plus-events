@@ -64,7 +64,7 @@ func (uc *BuyTicketsUseCase) Execute(input BuyTicketsInputDTO) (*BuyTicketsOutpu
 			return nil, err
 		}
 
-		ticket, err := domain.NewTicket(event, spot, domain.TicketType(input.TicketKind))
+		ticket, err := domain.NewTicket(event, spot, domain.TicketType(input.TicketType))
 		if err != nil {
 			return nil, err
 		}
@@ -84,6 +84,7 @@ func (uc *BuyTicketsUseCase) Execute(input BuyTicketsInputDTO) (*BuyTicketsOutpu
 	}
 
 	ticketDTOs := make([]TicketDTO, len(tickets))
+
 	for i, ticket := range tickets {
 		ticketDTOs[i] = TicketDTO{
 			ID:         ticket.ID,
